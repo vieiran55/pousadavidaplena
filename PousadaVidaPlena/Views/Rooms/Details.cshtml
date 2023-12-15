@@ -1,0 +1,29 @@
+﻿@using PousadaVidaPlena.Models.Enums
+@model PousadaVidaPlena.Models.Room
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <h4>
+        Room
+    </h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.Id)</dt>
+        <dd>@Html.DisplayFor(model => model.Id)</dd>
+        <dt>@Html.DisplayNameFor(model => model.RoomNumber)</dt>
+        <dd>@Html.DisplayFor(model => model.RoomNumber)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Type)</dt>
+        <dd>@Html.DisplayFor(model => model.Type)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Status)</dt>
+        <dd>@Html.DisplayFor(model => model.Status)</dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-default">Edit</a>
+    <a asp-action="Index">Back to list</a>
+</div>
