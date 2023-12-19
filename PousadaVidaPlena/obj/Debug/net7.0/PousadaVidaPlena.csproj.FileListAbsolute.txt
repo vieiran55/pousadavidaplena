@@ -40,3 +40,4 @@ C:\ProjetosC#Curso\PousadaVidaPlena\PousadaVidaPlena\bin\Debug\net7.0\Microsoft.
 C:\ProjetosC#Curso\PousadaVidaPlena\PousadaVidaPlena\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
 C:\ProjetosC#Curso\PousadaVidaPlena\PousadaVidaPlena\bin\Debug\net7.0\Mono.TextTemplating.dll
 C:\ProjetosC#Curso\PousadaVidaPlena\PousadaVidaPlena\bin\Debug\net7.0\System.CodeDom.dll
+C:\ProjetosC#Curso\PousadaVidaPlena\PousadaVidaPlena\obj\Debug\net7.0\PousadaVidaPlena.sourcelink.json

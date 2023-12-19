@@ -48,7 +48,7 @@ public class RoomsController : Controller
     // POST: Quarto/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("Id,RoomNumber,Type,Status")] Room quarto)
+    public async Task<IActionResult> Create([Bind("Id,RoomNumber,Type,Status,Price")] Room quarto)
     {
         // Verificar se o número do quarto já existe
         if (_context.Room.Any(r => r.RoomNumber == quarto.RoomNumber))
@@ -86,7 +86,7 @@ public class RoomsController : Controller
     // POST: Quarto/Edit/5
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, [Bind("Id,RoomNumber,Type,Status")] Room quarto)
+    public async Task<IActionResult> Edit(int id, [Bind("Id,RoomNumber,Type,Status,Price")] Room quarto)
     {
         // Verificar se o número do quarto já existe
         if (_context.Room.Any(r => r.RoomNumber == quarto.RoomNumber && r.Id != quarto.Id))

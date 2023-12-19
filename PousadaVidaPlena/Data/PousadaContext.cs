@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PousadaVidaPlena.Models;
+using PousadaVidaPlena.Models.Entities;
 
 namespace PousadaVidaPlena.Data
 {
@@ -8,5 +9,6 @@ namespace PousadaVidaPlena.Data
         public PousadaContext(DbContextOptions<PousadaContext> options) : base(options) { }
 
         public DbSet<Room> Room { get; set; } = default!;
+        public DbSet<Client> Client { get; set; }
     }
 }

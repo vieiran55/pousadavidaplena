@@ -15,6 +15,25 @@ namespace PousadaVidaPlena.Models
         public RoomType Type { get; set; }
         public RoomStatus Status { get; set; }
 
+        public double Price
+        {
+            get
+            {
+                // Lógica para determinar o preço com base no RoomType
+                switch (Type)
+                {
+                    case RoomType.Standard:
+                        return 100.00; // Define o preço para o tipo Standard
+                    case RoomType.Executivo:
+                        return 150.00; // Define o preço para o tipo Executivos
+                    case RoomType.Deluxe:
+                        return 200.00; // Define o preço para o tipo Deluxe
+                    default:
+                        return 0.00; // Valor padrão ou tratamento de erro
+                }
+            }
+        }
+
         public static List<Room> Rooms = new List<Room>();
 
         public Room() { }

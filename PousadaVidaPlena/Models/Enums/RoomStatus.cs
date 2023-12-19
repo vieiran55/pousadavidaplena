@@ -4,5 +4,6 @@
     {
         Disponivel = 0,
         Indisponivel = 1,
+        Manutenção = 3
     }
 }
