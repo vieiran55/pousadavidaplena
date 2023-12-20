@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PousadaVidaPlena.Data;
 
@@ -10,9 +11,11 @@ using PousadaVidaPlena.Data;
 namespace PousadaVidaPlena.Migrations
 {
     [DbContext(typeof(PousadaContext))]
-    partial class PousadaContextModelSnapshot : ModelSnapshot
+    [Migration("20231220192744_Employee2")]
+    partial class Employee2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,9 +108,6 @@ namespace PousadaVidaPlena.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("EmployeeFunction")
-                        .HasColumnType("int");
-
                     b.Property<string>("Gender")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -127,8 +127,9 @@ namespace PousadaVidaPlena.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("Rg")
-                        .HasColumnType("int");
+                    b.Property<string>("Rg")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("State")
                         .IsRequired()

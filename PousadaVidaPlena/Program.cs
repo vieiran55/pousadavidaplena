@@ -17,6 +17,8 @@ builder.Services.AddDbContext<PousadaContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 
+builder.Services.AddScoped<SeedingService>();
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -40,6 +42,14 @@ var localizationOption = new RequestLocalizationOptions
     SupportedUICultures = new List<CultureInfo> { enUS }
 };
 app.UseRequestLocalization(localizationOption);
+
+var scopeFactory = app.Services.GetRequiredService<IServiceScopeFactory>();
+using (var scope = scopeFactory.CreateScope())
+{
+    var seedingService = scope.ServiceProvider.GetRequiredService<SeedingService>();
+    seedingService.Seed();
+}
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

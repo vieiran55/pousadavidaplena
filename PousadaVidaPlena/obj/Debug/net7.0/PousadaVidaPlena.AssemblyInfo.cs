@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PousadaVidaPlena")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e3982560d04f228b698308d24e2bf9adba874437")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0d72a3cac43ac7698a756124913c37bfeaaa4034")]
 [assembly: System.Reflection.AssemblyProductAttribute("PousadaVidaPlena")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PousadaVidaPlena")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,20 +1,22 @@
-﻿// Client.cs
+﻿// Employee.cs
+using PousadaVidaPlena.Models.Enums;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using PousadaVidaPlena.Models.Entities;
 
 namespace PousadaVidaPlena.Models
 {
-    public class Client
+    public class Employee
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "{0} é obrigatório")]
+        [Display(Name = "Matrícula")]
+        public int Matricula { get; set; }
+
+        [Required(ErrorMessage = "{0} obrigatório")]
         [Display(Name = "Nome")]
         public string Name { get; set; }
 
-        [Display(Name = "Logradouro")]
+        [Display(Name = "Endereço")]
         public string Address { get; set; }
 
         [Display(Name = "Cidade")]
@@ -26,13 +28,11 @@ namespace PousadaVidaPlena.Models
         [Display(Name = "País")]
         public string Country { get; set; }
 
-        [Required(ErrorMessage = "{0} é obrigatório")]
         [Display(Name = "Número de telefone")]
         public string PhoneNumber { get; set; }
 
-        [Required(ErrorMessage = "{0} é obrigatório")]
-        [Display(Name = "E-mail")]
-        [EmailAddress(ErrorMessage = "E-mail inválido")]
+        [Required(ErrorMessage = "{0} obrigatório")]
+        [EmailAddress(ErrorMessage = "Email inválido")]
         public string Email { get; set; }
 
         [Display(Name = "Data de Nascimento")]
@@ -54,14 +54,23 @@ namespace PousadaVidaPlena.Models
         [CustomValidation(typeof(Client), "ValidateCpf")]
         public string Cpf { get; set; }
 
-        public Client() { }
+        public EmployeeFunction EmployeeFunction { get; set; }
 
-        public Client(int id, string name, string address, string phoneNumber, string email,
-                      DateTime birthDate, string gender, string nationality, int rg, string cpf, string estado, string cidade, string country)
+        public Employee() { }
+
+        public Employee(int id, int matricula, 
+            string name, string address, string city,
+            string state, string country, string phoneNumber,
+            string email, DateTime birthDate, string gender,
+            string nationality, int rg, string cpf, EmployeeFunction employeeFunction)
         {
             Id = id;
+            Matricula = matricula;
             Name = name;
             Address = address;
+            City = city;
+            State = state;
+            Country = country;
             PhoneNumber = phoneNumber;
             Email = email;
             BirthDate = birthDate;
@@ -69,9 +78,7 @@ namespace PousadaVidaPlena.Models
             Nationality = nationality;
             Rg = rg;
             Cpf = cpf;
-            City = cidade;
-            State = estado;
-            Country = country;
+            EmployeeFunction = employeeFunction;
         }
 
         public static ValidationResult ValidateCpf(string cpf, ValidationContext context)

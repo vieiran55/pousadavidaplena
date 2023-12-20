@@ -1,14 +1,12 @@
-﻿@model PousadaVidaPlena.Models.Client
+﻿@model PousadaVidaPlena.Models.Employee
 
 @{
-    ViewData["Title"] = "Editar Cliente";
+    ViewData["Title"] = "Criar Novo Funcionario";
 }
 
 <h2>@ViewData["Title"]</h2>
 
-<form asp-action="Edit" method="post">
-    <input type="hidden" asp-for="Id" />
-
+<form asp-action="Create">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <div class="form-group">
@@ -16,12 +14,12 @@
         <input asp-for="Name" class="form-control" />
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
-
     <div class="form-group">
         <label asp-for="Address" class="control-label"></label>
         <input asp-for="Address" class="form-control" />
         <span asp-validation-for="Address" class="text-danger"></span>
     </div>
+
     <div class="form-group">
         <label asp-for="City" class="control-label"></label>
         <input asp-for="City" class="form-control" />
@@ -81,6 +79,31 @@
     </div>
 
     <div class="form-group">
-        <input type="submit" value="Salvar Alterações" class="btn btn-primary" />
+        <label asp-for="EmployeeFunction" class="control-label"></label>
+        <input asp-for="EmployeeFunction" class="form-control" />
+        <span asp-validation-for="EmployeeFunction" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Criar" class="btn btn-primary" />
     </div>
 </form>
+
+@section Scripts {
+    <script>
+        var companionIndex = 1;
+
+        function addCompanionRow() {
+            var row = $('<tr>');
+            var col1 = $('<td>').append($('<input>').attr('type', 'text').attr('name', 'Companions[' + companionIndex + ']').addClass('form-control'));
+            var col2 = $('<td>').append($('<button>').attr('type', 'button').addClass('btn btn-danger').text('Remover').click(removeCompanionRow));
+            row.append(col1).append(col2);
+            $('#companionsTable tbody').append(row);
+            companionIndex++;
+        }
+
+        function removeCompanionRow() {
+            $(this).closest('tr').remove();
+        }
+    </script>
+}
