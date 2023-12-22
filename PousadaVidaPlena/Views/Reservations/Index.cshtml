@@ -1,0 +1,67 @@
+﻿@model IEnumerable<PousadaVidaPlena.Models.Reservation>
+
+@{
+    ViewData["Title"] = "Lista de Reservas";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a asp-action="Create">Adicionar Nova Reserva</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Client.Name)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Employee.Name)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Room.RoomNumber)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.CheckInDate)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.CheckOutDate)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.ReservationStatus)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Client.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Employee.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Room.RoomNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CheckInDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CheckOutDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReservationStatus)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

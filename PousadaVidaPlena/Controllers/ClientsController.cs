@@ -26,7 +26,9 @@ public class ClientsController : Controller
         var clients = await _context.Client
             .Where(c => string.IsNullOrEmpty(searchString) ||
             c.Name.Contains(searchString) ||
-            c.Email.Contains(searchString))
+            c.Email.Contains(searchString) ||
+            c.Cpf.Contains(searchString)) 
+
             .ToListAsync();
 
         return View(clients);

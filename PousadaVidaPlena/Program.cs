@@ -5,6 +5,8 @@ using System.Globalization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Localization;
 using PousadaVidaPlena.Data;
+using PousadaVidaPlena.Services;
+using SalesCurso.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +20,11 @@ builder.Services.AddDbContext<PousadaContext>(options =>
 });
 
 builder.Services.AddScoped<SeedingService>();
+builder.Services.AddScoped<RoomService>();
+builder.Services.AddScoped<EmployeeService>();
+builder.Services.AddScoped<ClientService>();
+builder.Services.AddScoped<ReservationService>();
+
 
 
 // Add services to the container.

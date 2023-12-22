@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PousadaVidaPlena.Data;
 
@@ -10,9 +11,11 @@ using PousadaVidaPlena.Data;
 namespace PousadaVidaPlena.Migrations
 {
     [DbContext(typeof(PousadaContext))]
-    partial class PousadaContextModelSnapshot : ModelSnapshot
+    [Migration("20231221140216_ClientTypeCPF")]
+    partial class ClientTypeCPF
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,9 +43,8 @@ namespace PousadaVidaPlena.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("Cpf")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                    b.Property<long>("Cpf")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -139,41 +141,6 @@ namespace PousadaVidaPlena.Migrations
                     b.ToTable("Employee");
                 });
 
-            modelBuilder.Entity("PousadaVidaPlena.Models.Reservation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CheckInDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("CheckOutDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("ClientId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ReservationStatus")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RoomId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClientId");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.HasIndex("RoomId");
-
-                    b.ToTable("Reservation");
-                });
-
             modelBuilder.Entity("PousadaVidaPlena.Models.Room", b =>
                 {
                     b.Property<int>("Id")
@@ -192,33 +159,6 @@ namespace PousadaVidaPlena.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Room");
-                });
-
-            modelBuilder.Entity("PousadaVidaPlena.Models.Reservation", b =>
-                {
-                    b.HasOne("PousadaVidaPlena.Models.Client", "Client")
-                        .WithMany()
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PousadaVidaPlena.Models.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PousadaVidaPlena.Models.Room", "Room")
-                        .WithMany()
-                        .HasForeignKey("RoomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Client");
-
-                    b.Navigation("Employee");
-
-                    b.Navigation("Room");
                 });
 #pragma warning restore 612, 618
         }

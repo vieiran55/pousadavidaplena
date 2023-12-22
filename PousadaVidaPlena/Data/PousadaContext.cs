@@ -11,6 +11,7 @@ namespace PousadaVidaPlena.Data
         public DbSet<Room> Room { get; set; } = default!;
         public DbSet<Client> Client { get; set; }
         public DbSet<Employee> Employee { get; set; }
+        public DbSet<Reservation> Reservation { get; set; }
 
     }
 }

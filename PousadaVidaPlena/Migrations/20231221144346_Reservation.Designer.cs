@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PousadaVidaPlena.Data;
 
@@ -10,9 +11,11 @@ using PousadaVidaPlena.Data;
 namespace PousadaVidaPlena.Migrations
 {
     [DbContext(typeof(PousadaContext))]
-    partial class PousadaContextModelSnapshot : ModelSnapshot
+    [Migration("20231221144346_Reservation")]
+    partial class Reservation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -157,10 +160,16 @@ namespace PousadaVidaPlena.Migrations
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("ReservationAmount")
+                        .HasColumnType("decimal(65,30)");
+
                     b.Property<int>("ReservationStatus")
                         .HasColumnType("int");
 
                     b.Property<int>("RoomId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoomType")
                         .HasColumnType("int");
 
                     b.HasKey("Id");

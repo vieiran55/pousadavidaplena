@@ -26,7 +26,8 @@ public class EmployeesController : Controller
         var employees = await _context.Employee
             .Where(e => string.IsNullOrEmpty(searchString) ||
                         e.Name.Contains(searchString) ||
-                        e.Email.Contains(searchString))
+                        e.Email.Contains(searchString) ||
+                        e.Cpf.Contains(searchString))
             .ToListAsync();
 
         return View(employees);
