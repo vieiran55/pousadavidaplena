@@ -21,21 +21,21 @@ namespace PousadaVidaPlena.Data
                 return; // db has benn seed
             }
 
-            Room r1 = new Room(1, 101, RoomType.Standard, RoomStatus.Disponivel);
-            Room r2 = new Room(2, 102, RoomType.Standard, RoomStatus.Disponivel);
-            Room r3 = new Room(3, 103, RoomType.Standard, RoomStatus.Disponivel);
-            Room r4 = new Room(4, 104, RoomType.Standard, RoomStatus.Disponivel);
-            Room r5 = new Room(5, 105, RoomType.Standard, RoomStatus.Disponivel);
-            Room r6 = new Room(6, 201, RoomType.Executivo, RoomStatus.Disponivel);
-            Room r7 = new Room(7, 202, RoomType.Executivo, RoomStatus.Disponivel);
-            Room r8 = new Room(8, 203, RoomType.Executivo, RoomStatus.Disponivel);
-            Room r9 = new Room(9, 204, RoomType.Executivo, RoomStatus.Disponivel);
-            Room r10 = new Room(10, 205, RoomType.Executivo, RoomStatus.Disponivel);
-            Room r11 = new Room(11, 301, RoomType.Deluxe, RoomStatus.Disponivel);
-            Room r12 = new Room(12, 302, RoomType.Deluxe, RoomStatus.Disponivel);
-            Room r13 = new Room(13, 303, RoomType.Deluxe, RoomStatus.Disponivel);
-            Room r14 = new Room(14, 304, RoomType.Deluxe, RoomStatus.Disponivel);
-            Room r15 = new Room(15, 305, RoomType.Deluxe, RoomStatus.Disponivel);
+            Room r1 = new Room(1, 101, RoomType.Standard, RoomStatus.Disponivel, 100.00);
+            Room r2 = new Room(2, 102, RoomType.Standard, RoomStatus.Disponivel, 100.00);
+            Room r3 = new Room(3, 103, RoomType.Standard, RoomStatus.Disponivel, 100.00);
+            Room r4 = new Room(4, 104, RoomType.Standard, RoomStatus.Disponivel, 100.00);
+            Room r5 = new Room(5, 105, RoomType.Standard, RoomStatus.Disponivel, 100.00);
+            Room r6 = new Room(6, 201, RoomType.Executivo, RoomStatus.Disponivel, 150.00);
+            Room r7 = new Room(7, 202, RoomType.Executivo, RoomStatus.Disponivel, 150.00);
+            Room r8 = new Room(8, 203, RoomType.Executivo, RoomStatus.Disponivel, 150.00);
+            Room r9 = new Room(9, 204, RoomType.Executivo, RoomStatus.Disponivel, 150.00);
+            Room r10 = new Room(10, 205, RoomType.Executivo, RoomStatus.Disponivel, 150.00);
+            Room r11 = new Room(11, 301, RoomType.Deluxe, RoomStatus.Disponivel, 250.00);
+            Room r12 = new Room(12, 302, RoomType.Deluxe, RoomStatus.Disponivel, 250.00);
+            Room r13 = new Room(13, 303, RoomType.Deluxe, RoomStatus.Disponivel, 250.00);
+            Room r14 = new Room(14, 304, RoomType.Deluxe, RoomStatus.Disponivel, 250.00);
+            Room r15 = new Room(15, 305, RoomType.Deluxe, RoomStatus.Disponivel, 250.00);
 
 
             Client c1 = new Client

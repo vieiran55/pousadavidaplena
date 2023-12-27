@@ -1,12 +1,19 @@
-﻿@model PousadaVidaPlena.Models.ViewModels.ReservationCreateViewModel
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model PousadaVidaPlena.Models.ViewModels.ReservationCreateViewModel
 
 @{
-    ViewData["Title"] = "Criar Nova Reserva";
+    ViewData["Title"] = "Editar Reserva";
 }
 
 <h2>@ViewData["Title"]</h2>
 
-<form asp-action="Create">
+<form asp-action="Edit">
+    <input type="hidden" asp-for="Reservation.Id" />
+
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div asp-validation-summary="All" class="text-danger"></div>
 
@@ -66,10 +73,8 @@
         <textarea asp-for="Reservation.Observations" class="form-control"></textarea>
     </div>
 
-@*     <h4 id="reservationAmountDisplay2">Total: R$ 0,00</h4> *@
-
     <div class="form-group">
-        <input type="submit" value="Criar" class="btn btn-primary" />
+        <input type="submit" value="Salvar" class="btn btn-primary" />
     </div>
 </form>
 
@@ -92,19 +97,19 @@
                             // Exiba as propriedades do quarto na nova seção
                             var roomDetailsHtml =
                                 `<table class="table">
-                                     <thead>
-                                        <th scope="row">Número do Quarto</th>
-                                        <th scope="row">Tipo do Quarto</th>
-                                        <th scope="row">Status do Quarto</th>
-                                        <th scope="row">Preço do Diária</th>
-                                     </thead>
-                                     <tbody>
-                                         <td>${data.roomNumber}</td>
-                                         <td>${data.type}</td>
-                                         <td>${data.status}</td>
-                                         <td>${data.price.toFixed(2)}</td>
-                                     </tbody>
-                                 </table>`;
+                                             <thead>
+                                                <th scope="row">Número do Quarto</th>
+                                                <th scope="row">Tipo do Quarto</th>
+                                                <th scope="row">Status do Quarto</th>
+                                                <th scope="row">Preço do Diária</th>
+                                             </thead>
+                                             <tbody>
+                                                 <td>${data.roomNumber}</td>
+                                                 <td>${data.type}</td>
+                                                 <td>${data.status}</td>
+                                                 <td>${data.price.toFixed(2)}</td>
+                                             </tbody>
+                                         </table>`;
                             $("#roomDetailsSection").html(roomDetailsHtml);
 
                             // Atualize o preço
@@ -166,7 +171,3 @@
         });
     </script>
 }
-
-
-
-

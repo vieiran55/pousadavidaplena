@@ -26,11 +26,13 @@ namespace PousadaVidaPlena.Models
 
         [Required(ErrorMessage = "{0} required")]
         [Display(Name = "Data de Check-in")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         [DataType(DataType.Date)]
         public DateTime CheckInDate { get; set; }
 
         [Required(ErrorMessage = "{0} required")]
         [Display(Name = "Data de Check-out")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         [DataType(DataType.Date)]
         public DateTime CheckOutDate { get; set; }
 
@@ -38,13 +40,19 @@ namespace PousadaVidaPlena.Models
         [Display(Name = "Estado da Reserva")]
         public ReservationStatus ReservationStatus { get; set; }
 
+        [Required(ErrorMessage = "{0} required")]
+        [Display(Name = "Valor Total")]
+        [Range(100.0, 500000.0, ErrorMessage = "{0} must be from {1} to {2}")]
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         public double ReservationAmount { get; set; }
+        [Display(Name = "Observações")]
+        public string Observations { get; set; }
 
         public Reservation() { }
 
         public Reservation(int id, Client client,
              Employee employee, Room room, DateTime checkInDate, DateTime checkOutDate,
-            ReservationStatus reservationStatus, double reservationAmount)
+            ReservationStatus reservationStatus, double reservationAmount, string observations)
         {
             Id = id;
             Client = client;
@@ -54,7 +62,8 @@ namespace PousadaVidaPlena.Models
             CheckInDate = checkInDate;
             CheckOutDate = checkOutDate;
             ReservationStatus = reservationStatus;
-            ReservationAmount = reservationAmount;  
+            ReservationAmount = reservationAmount;
+            Observations = observations;  // Adição da propriedade de observações
         }
     }
 

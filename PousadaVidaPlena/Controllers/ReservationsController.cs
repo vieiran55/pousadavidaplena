@@ -8,7 +8,7 @@ using PousadaVidaPlena.Data;
 using PousadaVidaPlena.Models;
 using PousadaVidaPlena.Models.ViewModels;
 using PousadaVidaPlena.Services;
-using SalesCurso.Services;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 public class ReservationsController : Controller
 {
@@ -75,28 +75,6 @@ public class ReservationsController : Controller
         return 0;
     }
 
-    // GET: Reservations/Details/5
-    public async Task<IActionResult> Details(int? id)
-    {
-        if (id == null)
-        {
-            return NotFound();
-        }
-
-        var reservation = await _context.Reservation
-            .Include(r => r.Client)
-            .Include(r => r.Employee)
-            .Include(r => r.Room)
-            .FirstOrDefaultAsync(m => m.Id == id);
-
-        if (reservation == null)
-        {
-            return NotFound();
-        }
-
-        return View(reservation);
-    }
-
     // GET: Reservations/Create
     public async Task<IActionResult> Create()
     {
@@ -128,19 +106,107 @@ public class ReservationsController : Controller
     {
         if (id == null)
         {
+            return RedirectToAction(nameof(Error), new { message = "Id not provided" });
+        }
+
+        var reservation = await _reservationService.FindByIdAsync(id.Value);
+
+        if (reservation == null)
+        {
+            return RedirectToAction(nameof(Error), new { message = "Reservation not found" });
+        }
+
+        var clients = await _clientService.FindAllAsync();
+        var rooms = await _roomService.FindAllAsync();
+        var employees = await _employeeService.FindAllAsync();
+
+        var viewModel = new ReservationCreateViewModel
+        {
+            Clients = clients,
+            Rooms = rooms,
+            Employees = employees,
+            Reservation = reservation
+        };
+
+        return View(viewModel);
+    }
+
+    // POST: Reservations/Edit/5
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(int id, Reservation reservation)
+    {
+        if (id != reservation.Id)
+        {
+            return RedirectToAction(nameof(Error), new { message = "Id mismatch" });
+        }
+
+        try
+        {
+            await _reservationService.UpdateAsync(reservation);
+            return RedirectToAction(nameof(Index));
+        }
+        catch (ApplicationException e)
+        {
+            return RedirectToAction(nameof(Error), new { message = e.Message });
+        }
+    }
+
+    // GET: Reservations/Details/5
+    public async Task<IActionResult> Details(int? id)
+    {
+        if (id == null)
+        {
             return NotFound();
         }
 
-        var reservation = await _context.Reservation.FindAsync(id);
+        var reservation = await _context.Reservation
+            .Include(r => r.Client)
+            .Include(r => r.Employee)
+            .Include(r => r.Room)
+            .FirstOrDefaultAsync(m => m.Id == id);
+
         if (reservation == null)
         {
             return NotFound();
         }
-        ViewData["ClientId"] = new SelectList(_context.Client, "Id", "Name", reservation.ClientId);
-        ViewData["EmployeeId"] = new SelectList(_context.Employee, "Id", "Name", reservation.EmployeeId);
-        ViewData["RoomId"] = new SelectList(_context.Room, "Id", "RoomNumber", reservation.RoomId);
+
         return View(reservation);
     }
+
+    // GET: Reservations/Delete/5
+    public async Task<IActionResult> Delete(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        var reservation = await _context.Reservation
+            .Include(r => r.Client)
+            .Include(r => r.Employee)
+            .Include(r => r.Room)
+            .FirstOrDefaultAsync(m => m.Id == id);
+
+        if (reservation == null)
+        {
+            return NotFound();
+        }
+
+        return View(reservation);
+    }
+
+    // POST: Reservations/Delete/5
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(int id)
+    {
+        var reservation = await _context.Reservation.FindAsync(id);
+        _context.Reservation.Remove(reservation);
+        await _context.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
+    }
+
 
     // ... (implementar os métodos restantes como Delete, etc.)
 }

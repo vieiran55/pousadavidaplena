@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Localization;
 using PousadaVidaPlena.Data;
 using PousadaVidaPlena.Services;
-using SalesCurso.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -42,13 +41,13 @@ if (!app.Environment.IsDevelopment())
 
 // cconfiguração de localização.
 var enUS = new CultureInfo("en-US");
-var localizationOption = new RequestLocalizationOptions
+var localizationOptions = new RequestLocalizationOptions
 {
     DefaultRequestCulture = new RequestCulture(enUS),
     SupportedCultures = new List<CultureInfo> { enUS },
     SupportedUICultures = new List<CultureInfo> { enUS }
 };
-app.UseRequestLocalization(localizationOption);
+app.UseRequestLocalization(localizationOptions);
 
 var scopeFactory = app.Services.GetRequiredService<IServiceScopeFactory>();
 using (var scope = scopeFactory.CreateScope())

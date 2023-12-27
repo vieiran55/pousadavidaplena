@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Data;
 using PousadaVidaPlena.Services.Exceptions;
 
-namespace SalesCurso.Services
+namespace PousadaVidaPlena.Services
 {
     public class ReservationService
     {
