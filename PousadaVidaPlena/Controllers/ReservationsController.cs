@@ -39,6 +39,42 @@ public class ReservationsController : Controller
         return View(reservations);
     }
 
+    [HttpGet]
+    public IActionResult GetReservationAmount(string checkInDate, string checkOutDate, int roomId)
+    {
+        // Converta as strings de datas para objetos DateTime
+        if (DateTime.TryParse(checkInDate, out DateTime parsedCheckInDate) &&
+            DateTime.TryParse(checkOutDate, out DateTime parsedCheckOutDate))
+        {
+            // Faça a lógica necessária para calcular o valor da reserva com base nas datas e no quarto
+            // Substitua a lógica abaixo pela lógica real do seu aplicativo
+            var reservationAmount = CalculateReservationAmount(parsedCheckInDate, parsedCheckOutDate, roomId);
+
+            // Retorne as informações da reserva em formato JSON
+            return Json(new { price = reservationAmount });
+        }
+
+        // Se as datas não puderem ser convertidas, retorne um objeto vazio ou uma mensagem de erro
+        return Json(new { });
+    }
+
+    private double CalculateReservationAmount(DateTime checkInDate, DateTime checkOutDate, int roomId)
+    {
+        // Substitua esta lógica pelo cálculo real do valor da reserva com base nas datas e no quarto
+        // Esta é apenas uma lógica de exemplo
+        // Você pode acessar o banco de dados ou usar qualquer outra lógica para calcular o preço
+        var room = _context.Room.FirstOrDefault(r => r.Id == roomId);
+
+        if (room != null)
+        {
+            // Adicione aqui a lógica para calcular o preço com base nas datas e no quarto
+            var price = room.Price * (checkOutDate - checkInDate).TotalDays;
+            return price;
+        }
+
+        return 0;
+    }
+
     // GET: Reservations/Details/5
     public async Task<IActionResult> Details(int? id)
     {

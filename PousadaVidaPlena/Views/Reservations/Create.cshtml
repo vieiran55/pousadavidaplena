@@ -28,22 +28,25 @@
 
     <div class="form-group">
         <label asp-for="Reservation.RoomId" class="control-label"></label>
-        <select asp-for="Reservation.RoomId" class="form-control" asp-items="@(new SelectList(Model.Rooms, "Id", "RoomNumber"))">
+        <select asp-for="Reservation.RoomId" class="form-control" id="RoomId" asp-items="@(new SelectList(Model.Rooms, "Id", "RoomNumber"))">
             <option value="">Selecione o Quarto</option>
         </select>
         <span asp-validation-for="Reservation.RoomId" class="text-danger"></span>
     </div>
 
+    <div id="roomDetailsSection">
+        <!-- Aqui serão exibidas as propriedades do quarto selecionado -->
+    </div>
 
     <div class="form-group">
         <label asp-for="Reservation.CheckInDate" class="control-label"></label>
-        <input asp-for="Reservation.CheckInDate" type="date" class="form-control" />
+        <input asp-for="Reservation.CheckInDate" type="date" class="form-control" id="CheckInDate" />
         <span asp-validation-for="Reservation.CheckInDate" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="Reservation.CheckOutDate" class="control-label"></label>
-        <input asp-for="Reservation.CheckOutDate" type="date" class="form-control" />
+        <input asp-for="Reservation.CheckOutDate" type="date" class="form-control" id="CheckOutDate" />
         <span asp-validation-for="Reservation.CheckOutDate" class="text-danger"></span>
     </div>
 
@@ -54,12 +57,102 @@
     </div>
 
     <div class="form-group">
+        <label asp-for="Reservation.ReservationAmount" class="control-label">Valor da Reserva</label>
+        <input asp-for="Reservation.ReservationAmount" id="reservationAmountDisplay" type="text" class="form-control" />
+    </div>
+
+    <h4 id="reservationAmountDisplay2">Total: R$ 0,00</h4>
+
+    <div class="form-group">
         <input type="submit" value="Criar" class="btn btn-primary" />
     </div>
 </form>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    <script>
+        $(document).ready(function () {
+
+            // Defina selectedRoomId como uma variável global
+            var selectedRoomId;
+
+            // Função para atualizar detalhes do quarto e preço
+            function updateRoomDetailsAndPrice() {
+                selectedRoomId = $("#RoomId").val(); // Atualize selectedRoomId aqui
+
+                if (selectedRoomId !== "") {
+                    $.ajax({
+                        url: "/Rooms/RoomDetails/" + selectedRoomId,
+                        type: "GET",
+                        success: function (data) {
+                            // Exiba as propriedades do quarto na nova seção
+                            var roomDetailsHtml = "<strong>Detalhes do Quarto:</strong><br>" +
+                                "Número do Quarto: " + data.roomNumber + "<br>" +
+                                "Tipo do Quarto: " + data.type + "<br>" +
+                                "Status do Quarto: " + data.status + "<br>" +
+                                "Preço do Quarto: " + data.price + "<br>";
+
+                            $("#roomDetailsSection").html(roomDetailsHtml);
+
+                            // Atualize o preço
+                            updateReservationAmount();
+                        },
+                        error: function () {
+                            console.error("Erro ao obter detalhes do quarto.");
+                        }
+                    });
+                } else {
+                    // Limpe a seção se o RoomId não estiver selecionado
+                    $("#roomDetailsSection").html("");
+                    $("#totalAmountDisplay").text("");
+                }
+            }
+
+            // Função para atualizar o preço com base nas datas
+            function updateReservationAmount() {
+                var checkInDate = $("#CheckInDate").val();
+                var checkOutDate = $("#CheckOutDate").val();
+
+                // Verifique se ambas as datas foram selecionadas
+                if (checkInDate && checkOutDate) {
+                    $.ajax({
+                        url: "/Reservations/GetReservationAmount",
+                        type: "GET",
+                        data: {
+                            checkInDate: checkInDate,
+                            checkOutDate: checkOutDate,
+                            roomId: selectedRoomId
+                        },
+                        success: function (data) {
+                            // Atualize o elemento <h4> com o valor do preço
+                            $("#reservationAmountDisplay").val(data.price);
+                            $("#reservationAmountDisplay2").text("Total: R$ " + data.price);
+
+                            // Se você deseja salvar o valor no modelo Reservation.Amount, atualize o valor do campo hidden correspondente
+                            $("ReservationAmount").val(data.price);
+                        },
+                        error: function () {
+                            console.error("Erro ao obter informações da reserva.");
+                        }
+                    });
+                }
+            }
+
+            // Ao trocar o quarto
+            $("#RoomId").change(function () {
+                updateRoomDetailsAndPrice();
+            });
+
+            // Ao trocar as datas de check-in ou check-out
+            $("#CheckInDate, #CheckOutDate").change(function () {
+                updateReservationAmount();
+            });
+
+            // Chame a função inicialmente para configurar a página
+            updateRoomDetailsAndPrice();
+        });
+    </script>
 }
+
+
+
+

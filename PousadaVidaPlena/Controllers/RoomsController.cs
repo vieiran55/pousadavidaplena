@@ -21,6 +21,7 @@ public class RoomsController : Controller
         return View(quartos);
     }
 
+
     // GET: Quarto/Details/5
     public async Task<IActionResult> Details(int? id)
     {
@@ -37,6 +38,33 @@ public class RoomsController : Controller
         }
 
         return View(quarto);
+    }
+
+    // GET: Rooms/Details/5
+    public async Task<IActionResult> RoomDetails(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        var room = await _context.Room
+            .FirstOrDefaultAsync(m => m.Id == id);
+
+        if (room == null)
+        {
+            return NotFound();
+        }
+
+        // Retorne os detalhes do quarto em formato JSON
+        return Json(new
+        {
+            RoomNumber = room.RoomNumber,
+            Type = room.Type.ToString(),
+            Status = room.Status.ToString(),
+            Price = room.Price
+            // Adicione outras propriedades conforme necessário
+        });
     }
 
     // GET: Quarto/Create

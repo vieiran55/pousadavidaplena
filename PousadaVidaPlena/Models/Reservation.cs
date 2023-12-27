@@ -37,11 +37,14 @@ namespace PousadaVidaPlena.Models
         [Required(ErrorMessage = "{0} required")]
         [Display(Name = "Estado da Reserva")]
         public ReservationStatus ReservationStatus { get; set; }
+
+        public double ReservationAmount { get; set; }
+
         public Reservation() { }
 
         public Reservation(int id, Client client,
              Employee employee, Room room, DateTime checkInDate, DateTime checkOutDate,
-            ReservationStatus reservationStatus)
+            ReservationStatus reservationStatus, double reservationAmount)
         {
             Id = id;
             Client = client;
@@ -51,7 +54,7 @@ namespace PousadaVidaPlena.Models
             CheckInDate = checkInDate;
             CheckOutDate = checkOutDate;
             ReservationStatus = reservationStatus;
-
+            ReservationAmount = reservationAmount;  
         }
     }
 
