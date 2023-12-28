@@ -1,0 +1,65 @@
+﻿@model IEnumerable<PousadaVidaPlena.Models.Reservation>
+
+@{
+    ViewData["Title"] = "Reservation Records - Simple Search";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <form class="form-horizontal" asp-action="SimpleSearch">
+            <fieldset>
+                <legend>Simple search</legend>
+                <div class="form-group">
+                    <label for="minDate" class="col-lg-2 control-label">Min Date</label>
+                    <div class="col-lg-10">
+                        <input type="date" name="minDate" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="maxDate" class="col-lg-2 control-label">Max Date</label>
+                    <div class="col-lg-10">
+                        <input type="date" name="maxDate" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Reservation Records - Simple Search Results</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>NrReservation</th>
+                    <th>Client</th>
+                    <th>Employee</th>
+                    <th>Room</th>
+                    <th>Check-In Date</th>
+                    <th>Check-Out Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var reservation in Model)
+                {
+                    <tr>
+                        <td>@reservation.NrReservation</td>
+                        <td>@reservation.Client.Name</td>
+                        <td>@reservation.Employee.Name</td>
+                        <td>@reservation.Room.RoomNumber</td>
+                        <td>@reservation.CheckInDate.ToString("dd/MM/yyyy")</td>
+                        <td>@reservation.CheckOutDate.ToString("dd/MM/yyyy")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

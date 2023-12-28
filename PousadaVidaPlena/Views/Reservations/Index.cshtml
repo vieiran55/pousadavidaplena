@@ -10,9 +10,16 @@
     <a asp-action="Create">Adicionar Nova Reserva</a>
 </p>
 
+<p>
+    <a asp-controller="ReservationRecords" asp-action="Index">Ir para busca detalhada</a>
+</p>
+
 <table class="table">
     <thead>
         <tr>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.NrReservation)
+            </th>
             <th scope="col">
                 @Html.DisplayNameFor(model => model.Client.Name)
             </th>
@@ -38,6 +45,9 @@
         @foreach (var item in Model)
         {
             <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NrReservation)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Client.Name)
                 </td>

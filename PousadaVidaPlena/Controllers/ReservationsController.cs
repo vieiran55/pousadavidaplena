@@ -17,14 +17,22 @@ public class ReservationsController : Controller
     private readonly ClientService _clientService;
     private readonly EmployeeService _employeeService;
     private readonly ReservationService _reservationService;
+    private readonly ReservationValidationService _reservationValidationService;
 
-    public ReservationsController(PousadaContext context, RoomService roomService, ClientService clientService, EmployeeService employeeService, ReservationService reservationService)
+    public ReservationsController(
+        PousadaContext context,
+        RoomService roomService,
+        ClientService clientService,
+        EmployeeService employeeService,
+        ReservationService reservationService,
+        ReservationValidationService reservationValidationService)
     {
         _context = context;
         _roomService = roomService;
         _clientService = clientService;
         _employeeService = employeeService;
         _reservationService = reservationService;
+        _reservationValidationService = reservationValidationService;
     }
 
     // GET: Reservations
@@ -38,6 +46,7 @@ public class ReservationsController : Controller
 
         return View(reservations);
     }
+
 
     [HttpGet]
     public IActionResult GetReservationAmount(string checkInDate, string checkOutDate, int roomId)
@@ -87,18 +96,32 @@ public class ReservationsController : Controller
     }
 
     // POST: Reservations/Create
-    // POST: Reservations/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(Reservation reservation)
     {
- 
-  
+        // Verifica se a reserva é válida usando o serviço de validação
+        if (await _reservationValidationService.IsReservationValidAsync(reservation))
+        {
+
+            // Fixe as horas de check-in e check-out
+            reservation.CheckInDate = new DateTime(reservation.CheckInDate.Year, reservation.CheckInDate.Month, reservation.CheckInDate.Day, 14, 0, 0);
+            reservation.CheckOutDate = new DateTime(reservation.CheckOutDate.Year, reservation.CheckOutDate.Month, reservation.CheckOutDate.Day, 12, 0, 0);
+
+            // Se a reserva for válida, insira-a
+            var lastReserva = _context.Reservation.OrderByDescending(e => e.NrReservation).FirstOrDefault()?.NrReservation ?? 1000;
+            reservation.NrReservation = (lastReserva == 0) ? 1001 : lastReserva + 1;
             await _reservationService.InsertAsync(reservation);
             return RedirectToAction(nameof(Index));
-        
+        }
 
-
+        // Se a reserva não for válida, redirecione de volta ao formulário com uma mensagem de erro
+        ModelState.AddModelError(string.Empty, "Já existe uma reserva para o quarto nas datas selecionadas.");
+        var clients = await _clientService.FindAllAsync();
+        var rooms = await _roomService.FindAllAsync();
+        var employees = await _employeeService.FindAllAsync();
+        var viewModel = new ReservationCreateViewModel { Clients = clients, Rooms = rooms, Employees = employees, Reservation = reservation };
+        return View(viewModel);
     }
 
     // GET: Reservations/Edit/5

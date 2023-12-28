@@ -40,7 +40,7 @@
 
     <div class="form-group">
         <label asp-for="Reservation.CheckInDate" class="control-label"></label>
-        <input asp-for="Reservation.CheckInDate" type="date" class="form-control" id="CheckInDate" />
+        <input asp-for="Reservation.CheckInDate" type="date" class="form-control" id="CheckInDate"/>
         <span asp-validation-for="Reservation.CheckInDate" class="text-danger"></span>
     </div>
 
@@ -118,6 +118,7 @@
                     // Limpe a seção se o RoomId não estiver selecionado
                     $("#roomDetailsSection").html("");
                     $("#totalAmountDisplay").text("");
+                    $("#Reservation_Observations").text("_");
                 }
             }
 
@@ -165,6 +166,7 @@
             updateRoomDetailsAndPrice();
         });
     </script>
+            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
 
 

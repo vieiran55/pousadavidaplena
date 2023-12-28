@@ -46,7 +46,7 @@ namespace PousadaVidaPlena.Models
         public string Nationality { get; set; }
 
         [Display(Name = "RG")]
-        public int Rg { get; set; }
+        public string Rg { get; set; }
 
         [Required(ErrorMessage = "{0} required")]
         [Display(Name = "CPF")]
@@ -62,7 +62,7 @@ namespace PousadaVidaPlena.Models
             string name, string address, string city,
             string state, string country, string phoneNumber,
             string email, DateTime birthDate, string gender,
-            string nationality, int rg, string cpf, EmployeeFunction employeeFunction)
+            string nationality, string rg, string cpf, EmployeeFunction employeeFunction)
         {
             Id = id;
             Matricula = matricula;

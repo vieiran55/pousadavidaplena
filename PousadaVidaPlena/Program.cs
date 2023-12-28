@@ -23,6 +23,10 @@ builder.Services.AddScoped<RoomService>();
 builder.Services.AddScoped<EmployeeService>();
 builder.Services.AddScoped<ClientService>();
 builder.Services.AddScoped<ReservationService>();
+builder.Services.AddScoped<ReservationValidationService>();
+builder.Services.AddScoped<ReservationRecordService>();
+builder.Services.AddScoped<ReservationAvailabilityService>();
+
 
 
 

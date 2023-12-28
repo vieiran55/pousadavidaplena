@@ -13,16 +13,16 @@ namespace PousadaVidaPlena.Models
         [Required(ErrorMessage = "{0} é obrigatório")]
         [Display(Name = "Nome")]
         public string Name { get; set; }
-
+        [Required(ErrorMessage = "{0} é obrigatório")]
         [Display(Name = "Logradouro")]
         public string Address { get; set; }
-
+        [Required(ErrorMessage = "{0} é obrigatório")]
         [Display(Name = "Cidade")]
         public string City { get; set; }
-
+        [Required(ErrorMessage = "{0} é obrigatório")]
         [Display(Name = "Estado")]
         public string State { get; set; }
-
+        [Required(ErrorMessage = "{0} é obrigatório")]
         [Display(Name = "País")]
         public string Country { get; set; }
 
@@ -34,17 +34,17 @@ namespace PousadaVidaPlena.Models
         [Display(Name = "E-mail")]
         [EmailAddress(ErrorMessage = "E-mail inválido")]
         public string Email { get; set; }
-
+        [Required(ErrorMessage = "{0} é obrigatório")]
         [Display(Name = "Data de Nascimento")]
         [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
-
+        [Required(ErrorMessage = "{0} é obrigatório")]
         [Display(Name = "Gênero")]
         public string Gender { get; set; }
-
+        [Required(ErrorMessage = "{0} é obrigatório")]
         [Display(Name = "Nacionalidade")]
         public string Nationality { get; set; }
-
+        [Required(ErrorMessage = "{0} é obrigatório")]
         [Display(Name = "RG")]
         public int Rg { get; set; }
 

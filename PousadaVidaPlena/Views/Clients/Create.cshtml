@@ -100,5 +100,9 @@
         function removeCompanionRow() {
             $(this).closest('tr').remove();
         }
+
+
     </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+

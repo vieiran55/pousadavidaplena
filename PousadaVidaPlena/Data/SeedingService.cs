@@ -385,7 +385,7 @@ namespace PousadaVidaPlena.Data
                 BirthDate = new DateTime(1992, 11, 19),
                 Gender = "Masculino",
                 Nationality = "Brasileiro",
-                Rg = 123456789,
+                Rg = "123456789",
                 Cpf = "01234567890",
                 EmployeeFunction = EmployeeFunction.Gerente
             };
@@ -404,7 +404,7 @@ namespace PousadaVidaPlena.Data
                 BirthDate = new DateTime(1986, 3, 28),
                 Gender = "Feminino",
                 Nationality = "Japonesa",
-                Rg = 987654321,
+                Rg = "987654321",
                 Cpf = "01234567890",
                 EmployeeFunction = EmployeeFunction.Administrativo
             };
@@ -423,7 +423,7 @@ namespace PousadaVidaPlena.Data
                 BirthDate = new DateTime(737, 4, 16),
                 Gender = "Masculino",
                 Nationality = "Saiyan",
-                Rg = 111223344,
+                Rg = "111223344",
                 Cpf = "0323456780",
                 EmployeeFunction = EmployeeFunction.Gerais
             };
@@ -443,7 +443,7 @@ namespace PousadaVidaPlena.Data
                 BirthDate = new DateTime(2002, 10, 10),
                 Gender = "Masculino",
                 Nationality = "Japanese",
-                Rg = 876543210,
+                Rg = "876543210",
                 Cpf = "01233267890",
                 EmployeeFunction = EmployeeFunction.Suporte
             };
@@ -463,7 +463,7 @@ namespace PousadaVidaPlena.Data
                 BirthDate = new DateTime(1899, 2, 3),
                 Gender = "Masculino",
                 Nationality = "Amestrian",
-                Rg = 987654321,
+                Rg = "987654321",
                 Cpf = "01234567870",
                 EmployeeFunction = EmployeeFunction.Gerais
             };
@@ -483,7 +483,7 @@ namespace PousadaVidaPlena.Data
                 BirthDate = new DateTime(1978, 6, 30),
                 Gender = "Feminino",
                 Nationality = "Japanese",
-                Rg = 654321987,
+                Rg = "654321987",
                 Cpf = "01264567890",
                 EmployeeFunction = EmployeeFunction.Gerais
             };
