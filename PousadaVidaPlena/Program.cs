@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Localization;
 using PousadaVidaPlena.Data;
 using PousadaVidaPlena.Services;
+using DinkToPdf.Contracts;
+using DinkToPdf;
 
 
 var builder = WebApplication.CreateBuilder(args);

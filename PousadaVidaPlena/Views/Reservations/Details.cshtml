@@ -65,6 +65,10 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Observations)
         </dd>
+        <form asp-action="GeneratePdf" method="post">
+            <input type="hidden" name="id" value="@Model.Id" />
+            <button type="submit" class="btn btn-info">Download Reserva</button>
+        </form>
     </dl>
 </div>
 <div>

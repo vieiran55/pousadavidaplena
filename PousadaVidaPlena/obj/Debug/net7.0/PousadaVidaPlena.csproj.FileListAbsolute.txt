@@ -41,3 +41,9 @@ C:\ProjetosC#Curso\PousadaVidaPlena\PousadaVidaPlena\bin\Debug\net7.0\Microsoft.
 C:\ProjetosC#Curso\PousadaVidaPlena\PousadaVidaPlena\bin\Debug\net7.0\Mono.TextTemplating.dll
 C:\ProjetosC#Curso\PousadaVidaPlena\PousadaVidaPlena\bin\Debug\net7.0\System.CodeDom.dll
 C:\ProjetosC#Curso\PousadaVidaPlena\PousadaVidaPlena\obj\Debug\net7.0\PousadaVidaPlena.sourcelink.json
+C:\ProjetosC#Curso\PousadaVidaPlena\PousadaVidaPlena\bin\Debug\net7.0\DinkToPdf.dll
+C:\ProjetosC#Curso\PousadaVidaPlena\PousadaVidaPlena\bin\Debug\net7.0\PdfSharpCore.dll
+C:\ProjetosC#Curso\PousadaVidaPlena\PousadaVidaPlena\bin\Debug\net7.0\ICSharpCode.SharpZipLib.dll
+C:\ProjetosC#Curso\PousadaVidaPlena\PousadaVidaPlena\bin\Debug\net7.0\SixLabors.Fonts.dll
+C:\ProjetosC#Curso\PousadaVidaPlena\PousadaVidaPlena\bin\Debug\net7.0\SixLabors.ImageSharp.dll
+C:\ProjetosC#Curso\PousadaVidaPlena\PousadaVidaPlena\bin\Debug\net7.0\de\PdfSharpCore.resources.dll

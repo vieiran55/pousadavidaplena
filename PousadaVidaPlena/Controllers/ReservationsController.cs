@@ -193,8 +193,32 @@ public class ReservationsController : Controller
         {
             return NotFound();
         }
-
         return View(reservation);
+    }
+
+    public IActionResult GeneratePdf(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        var reservation = _context.Reservation
+            .Include(r => r.Client)
+            .Include(r => r.Employee)
+            .Include(r => r.Room)
+            .FirstOrDefault(m => m.Id == id);
+
+        if (reservation == null)
+        {
+            return NotFound();
+        }
+
+        // Gere o PDF com base nos dados da reserva
+        byte[] pdfBytes = PdfGenerator.GenerateReservationPdf(reservation);
+
+        // Retorne o PDF como um arquivo para download
+        return File(pdfBytes, "application/pdf", $"Reservation_{id}.pdf");
     }
 
     // GET: Reservations/Delete/5
