@@ -8,17 +8,28 @@ using PousadaVidaPlena.Data;
 using PousadaVidaPlena.Services;
 using DinkToPdf.Contracts;
 using DinkToPdf;
+using Microsoft.AspNetCore.Identity;
+using PousadaVidaPlena.Areas.Identity.Data;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 
-// Configurando o DbContext com MySQL e definindo a versão do servidor
+// Configurando o DbContext com MySQL e definindo a versï¿½o do servidor
 builder.Services.AddDbContext<PousadaContext>(options =>
 {
     var connectionString = builder.Configuration.GetConnectionString("PousadaContext");
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
+
+builder.Services.AddDbContext<AuthDbContext>(options =>
+{
+    var authConnectionString = builder.Configuration.GetConnectionString("AuthDbContext");
+    options.UseMySql(authConnectionString, ServerVersion.AutoDetect(authConnectionString));
+});
+
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
+               .AddEntityFrameworkStores<AuthDbContext>();
 
 builder.Services.AddScoped<SeedingService>();
 builder.Services.AddScoped<RoomService>();
@@ -34,6 +45,12 @@ builder.Services.AddScoped<ReservationAvailabilityService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.Password.RequireUppercase = false;
+});
 
 var app = builder.Build();
 
@@ -45,7 +62,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-// cconfiguração de localização.
+// cconfigurao de localizao.
 var enUS = new CultureInfo("en-US");
 var localizationOptions = new RequestLocalizationOptions
 {
@@ -73,5 +90,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapRazorPages();
+
 
 app.Run();
